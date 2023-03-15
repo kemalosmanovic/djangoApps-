@@ -1,0 +1,19 @@
+{% extends "itreporting/base.html" %}
+{% block content %}<h1>Welcome to Issues Report</h1>
+
+    {% for issue in issues %}
+
+    <article class="media content-section">
+        <img class="rounded-circle article-img" src="{{issue.author.profile.image.url}}"/>
+        <div class="media-body">
+          <div class="article-metadata">
+            <small class="text-muted">Posted by {{issue.author}} on {{issue.date_submitted}}</small>
+          </div>
+          <h3><a class="article-title" href="#">{{issue.type}} Issue in Room {{issue.room}}</a></h3>
+          <p class="article-content">{{issue.details}}</p>
+
+        </div>
+
+      </article>
+{% endfor %}
+{% endblock %}

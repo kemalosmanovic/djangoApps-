@@ -20,14 +20,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-b4nbys7k0=ot04rqwzijquytal5wmim5g5v*)!yk7$pr52iw+t'
+SECRET_KEY = os.enviorn.get('django-insecure-b4nbys7k0=ot04rqwzijquytal5wmim5g5v*)!yk7$pr52iw+t')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [os.environ.get('WEBSITE_HOSTNAME', 'localhost')]
 
-
+CSRF_TRUSTED_ORIGINS = ['https://' + os.environ.get('WEBSITE_HOSTNAME', 'localhost')]
 # Application definition
 
 INSTALLED_APPS = [
@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'itapps',
-    'users',
+    'users.apps.UsersConfig',
     'crispy_forms',
 
 ]
@@ -121,6 +121,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 STATICFILES_DIRS=[os.path.join(BASE_DIR, 'itreporting/static')]
 STATIC_ROOT=os.path.join(BASE_DIR,'static')
 
@@ -130,3 +132,8 @@ STATIC_ROOT=os.path.join(BASE_DIR,'static')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+LOGIN_REDIRECT_URL= 'itreporting-home'
+
+LOGIN_URL = 'login'
+
